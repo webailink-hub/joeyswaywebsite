@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joey's Way | Luxury Personal Chef</title>
+    <meta name="description" content="Experience the ultimate in-home dining with Joey's Way, a luxury personal chef service specializing in Mexican-Hibachi fusion cuisine. Book your unforgettable culinary event today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS ARCHITECTURE: MOBILE-FIRST APPROACH */
+        :root {
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-red: #e31507;
+            --color-gray: #f4f4f4;
+            --header-height: 4.5rem;
+            font-size: 16px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+        body { font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.7; color: var(--color-black); background-color: var(--color-white); overflow-x: hidden; }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        h1 { font-size: 2.5rem; } h2 { font-size: 2rem; } h3 { font-size: 1.5rem; }
+        .container { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.25rem; }
+        .section { padding: 4rem 0; }
+        .btn { display: inline-block; padding: 0.75rem 1.75rem; border-radius: 50px; text-decoration: none; font-weight: 700; transition: transform 0.3s ease; cursor: pointer; border: none; }
+        .btn-red { background-color: var(--color-red); color: var(--color-white); }
+        .btn:hover { transform: scale(1.05); }
+        .text-center { text-align: center; } strong { font-weight: 700; }
+        .fade-in { opacity: 0; transform: translateY(1.875rem); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        img, video { max-width: 100%; height: auto; }
+
+        .header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 1000; transition: box-shadow 0.3s ease; }
+        .header.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--color-black); text-decoration: none; }
+        .nav-menu { position: fixed; left: -100%; top: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; background-color: var(--color-white); width: 100%; height: 100vh; list-style: none; transition: left 0.3s ease-in-out; padding-left: 2.5rem; }
+        .nav-menu.active { left: 0; }
+        .nav-item { margin: 1.25rem 0; }
+        .nav-link { text-decoration: none; color: var(--color-black); font-size: 1.25rem; }
+        .header-actions { display: none; }
+        .nav-book-mobile { display: block; }
+        .hamburger { display: block; cursor: pointer; z-index: 1001; }
+        .hamburger .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: var(--color-black); transition: all 0.3s ease-in-out; }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        .dropdown { position: relative; }
+        .dropdown-menu { list-style: none; background: none; text-align: center; padding: 0; margin-top: 0.625rem; }
+        .dropdown-item a { padding: 0.5rem 0; color: var(--color-black); font-size: 0.875rem; text-decoration: none; }
+
+        #home { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; color: var(--color-white); text-align: center; padding: 0; overflow: hidden; }
+        .hero-video-bg { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: -2; }
+        #home::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: -1; }
+        .hero-content h1 { font-size: 2.625rem; }
+        .hero-content p { font-size: 1.125rem; margin-bottom: 1.875rem; }
+        
+        .intro-section, .about-grid, .pricing-grid, .how-it-works, .taco-menu-grid, .services-overview-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        .intro-section img { width: 100%; max-width: 18.75rem; height: auto; border-radius: 50%; object-fit: cover; justify-self: center; }
+        .about-grid img { width: 100%; border-radius: 0.75rem; }
+        .service-card { background: var(--color-white); border-radius: 0.75rem; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); text-align: center; }
+        .service-card img { width: 100%; height: 15.625rem; object-fit: cover; }
+        .service-card-content { padding: 1.875rem; }
+        .service-card h3 { margin-bottom: 1rem; }
+
+        .service-banner { height: 40vh; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: var(--color-white); text-align: center; position: relative; }
+        .service-banner::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); }
+        .service-banner h2 { z-index: 1; font-size: 2rem; }
+        .service-content { padding: 4rem 0; }
+        .service-content ul { list-style: none; text-align: left; }
+        .service-content li { margin-bottom: 0.5rem; }
+        #hibachi .service-content { background-color: var(--color-white); }
+        #taco-bar .service-content { background-color: var(--color-gray); }
+        #buffet .service-content { background-color: var(--color-white); }
+        .service-description { margin: 0 auto 3rem auto; text-align: center; max-width: 45rem; }
+        .price-box { border: 1px solid #ddd; border-radius: 0.75rem; padding: 2rem; text-align: center; }
+        .price-box h3 { color: var(--color-red); }
+        .price-box ul { list-style: none; margin-top: 1.25rem; text-align: left; }
+        .price-box li { padding: 0.3125rem 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+        .gallery-grid img { width: 100%; height: 15.625rem; object-fit: cover; border-radius: 0.5rem; }
+        
+        #testimonials { background-color: var(--color-gray); position: relative; overflow: hidden; }
+        .testimonial-slider { position: relative; max-width: 50rem; margin: 0 auto; }
+        .testimonial-slide { display: none; text-align: center; }
+        .testimonial-slide.active { display: block; }
+        .testimonial-slide p { font-size: 1.125rem; font-style: italic; margin-bottom: 1.25rem; }
+        .stars { color: #f39c12; }
+        .slider-controls { display: none; }
+        
+        .faq-accordion { max-width: 50rem; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #ddd; }
+        .faq-question { width: 100%; background: none; border: none; text-align: left; font-size: 1.125rem; font-weight: 700; padding: 1.25rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question::after { content: '+'; font-size: 1.5rem; transition: transform 0.3s ease; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .faq-answer p { padding: 0 0 1.25rem 0; }
+        
+        .footer { background-color: var(--color-black); color: var(--color-white); padding: 3rem 0; text-align: center; }
+        .footer-nav { list-style: none; display: flex; justify-content: center; gap: 1.25rem; margin: 1.25rem 0; }
+        .footer-nav a { color: var(--color-white); text-decoration: none; }
+        .social-icons { margin: 1.25rem 0; }
+        .social-icons a { color: var(--color-white); margin: 0 0.625rem; font-size: 1.5rem; text-decoration: none; }
+        .footer p a { color: inherit; text-decoration: none; }
+
+        @media (min-width: 768px) {
+            :root { --header-height: 5rem; }
+            h1 { font-size: 3rem; }
+            .section { padding: 5rem 0; }
+            .header { padding: 0 2.5rem; }
+            .nav-menu { position: static; flex-direction: row; width: auto; height: auto; background: none; gap: 1.875rem; padding-left: 0; }
+            .nav-item { margin: 0; }
+            .nav-link { font-size: 1rem; position: relative; padding-bottom: 0.3125rem; }
+            .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--color-red); transition: width 0.3s ease; }
+            .nav-link:hover::after { width: 100%; }
+            .hamburger, .nav-book-mobile { display: none; }
+            .header-actions { display: block; }
+            .dropdown-menu { position: absolute; top: 100%; left: 0; background-color: var(--color-white); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 0.5rem; display: none; margin-top: 0.625rem; padding: 0.625rem 0; min-width: 12.5rem; }
+            .dropdown:hover .dropdown-menu { display: block; }
+            .dropdown-item a { display: block; padding: 0.625rem 1.25rem; transition: background-color 0.3s ease; }
+            .dropdown-item a:hover { background-color: var(--color-gray); }
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-content p { font-size: 1.25rem; }
+            .services-overview-grid { grid-template-columns: repeat(3, 1fr); }
+            .intro-section { grid-template-columns: 1fr 2fr; align-items: center; }
+            .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+            .about-grid img { order: 0; }
+            .pricing-grid, .how-it-works, .taco-menu-grid { grid-template-columns: 1fr 1fr; }
+            .service-banner h2 { font-size: 3rem; }
+            .slider-controls { display: flex; position: absolute; top: 50%; width: 100%; justify-content: space-between; transform: translateY(-50%); }
+            .slider-btn { background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--color-black); padding: 0 1.25rem; }
+        }
+        
+        @media (min-width: 1024px) {
+            h1 { font-size: 3rem; }
+            .hero-content h1 { font-size: 4.5rem; }
+            .hero-content p { font-size: 1.5rem; }
+            .section { padding: 6.25rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <a href="#home" class="logo">Joey's Way</a>
+        <nav>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#services" class="nav-link">Services</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="#hibachi">Hibachi Experience</a></li>
+                        <li class="dropdown-item"><a href="#taco-bar">Taco Bar Fiesta</a></li>
+                        <li class="dropdown-item"><a href="#buffet">Buffet Catering</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+                <li class="nav-item nav-book-mobile"><a href="#book-now" class="btn btn-red">Book Now</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="#book-now" class="btn btn-red">Book Now</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </div>
+    </header>
+
+    <main>
+        <section id="home">
+            <video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="https://i.imgur.com/AzbEVGt.jpeg" aria-label="Dynamic video showing hibachi cooking and happy guests enjoying tacos.">
+                <source src="https://i.imgur.com/7DOK0gM.mp4" type="video/mp4">
+            </video>
+            <div class="hero-content fade-in">
+                <h1>Joey’s Way</h1>
+                <p>"Joey’s Way is the only way"</p>
+                <a href="#book-now" class="btn btn-red">Book Your Experience</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="intro-section fade-in">
+                    <img src="https://i.imgur.com/IjXuSwA.jpeg" alt="Chef Joseph smiling beside the grill." loading="lazy" width="300" height="300">
+                    <div>
+                        <h2>A Taste of Artful Fusion</h2>
+                        <p>At <strong>Joey’s Way</strong>, we redefine private dining through a bold and unforgettable fusion of <strong>Mexican flair</strong> and <strong>Hibachi-style showmanship</strong>. Led by Chef Joseph, every event becomes a culinary performance—part tradition, part innovation, and entirely your way.</p>
+                        <a href="#about" style="color: var(--color-red); font-weight: 700;">Read Our Story</a>
+                    </div>
+                </div>
+
+                <h2 class="text-center" style="margin-top: 5rem; margin-bottom: 2.5rem;">Our Experiences</h2>
+                <div class="services-overview-grid">
+                    <div class="service-card fade-in">
+                        <img src="https://i.imgur.com/PS9UfKb.jpeg" alt="A sizzling hibachi grill with fresh ingredients." loading="lazy" width="400" height="300">
+                        <div class="service-card-content">
+                            <h3>Hibachi Experience</h3>
+                            <p>Fire, flavor, and flair come together in your own backyard. An interactive grill show where guests savor freshly prepared Hibachi fusion creations.</p>
+                            <a href="#hibachi" style="color: var(--color-red); font-weight: 700;">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                         <img src="https://i.imgur.com/lGahsFI.jpeg" alt="A vibrant spread of freshly made tacos and toppings." loading="lazy" width="400" height="300">
+                        <div class="service-card-content">
+                            <h3>Taco Bar</h3>
+                            <p>A vibrant and social dining setup that brings the spirit of street tacos to your event—with top-quality ingredients and Chef Joey’s signature flair.</p>
+                            <a href="#taco-bar" style="color: var(--color-red); font-weight: 700;">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="service-card fade-in" style="transition-delay: 0.4s;">
+                        <img src="https://i.imgur.com/LYfjjqC.png" alt="An elegant buffet setup for a large corporate event." loading="lazy" width="400" height="300">
+                        <div class="service-card-content">
+                            <h3>Buffet-Style Catering</h3>
+                            <p>Perfect for weddings, corporate celebrations, and large gatherings. Elegant presentation meets effortless service with flavors guests will remember.</p>
+                            <a href="#buffet" style="color: var(--color-red); font-weight: 700;">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section" style="background-color: var(--color-gray);">
+            <div class="container">
+                <div class="about-grid fade-in">
+                    <img src="https://i.imgur.com/AzbEVGt.jpeg" alt="Chef Joseph at work, with dramatic flames rising from the grill." loading="lazy" width="600" height="450">
+                    <div>
+                        <h2>Where Tradition Meets Innovation</h2>
+                        <p>Chef Joseph’s culinary journey began with a love for both Japanese precision and Mexican soul. The result? A distinctive <strong>Mexican-Hibachi fusion</strong> that brings the best of both worlds together—a dining style that’s lively, flavorful, and deeply personal.</p>
+                        <p>At <strong>Joey’s Way</strong>, every meal is a performance of connection—between chef and guest, flavor and artistry. Chef Joseph believes that food isn’t just meant to be eaten—it’s meant to be <strong>experienced</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div id="services">
+             <h2 class="text-center" style="padding-top: 5rem; margin-bottom: -2rem;">Our Culinary Services</h2>
+        </div>
+
+        <section id="hibachi">
+            <div class="service-banner" style="background-image: url('https://i.imgur.com/1wF9KX8.jpeg');" aria-label="Chef at the grill surrounded by flames and laughing guests.">
+                <h2>The Hibachi Fusion Experience</h2>
+            </div>
+            <div class="service-content">
+                <div class="container fade-in">
+                    <div class="service-description"><p>Turn your event into an open-air culinary show where Chef Joseph dazzles guests with sizzling techniques and bold, fusion flavors. Each course blends authentic Hibachi performance with the spice and creativity of Mexican cuisine.</p></div>
+                    <h3 class="text-center" style="margin-bottom: 2rem;">Pricing & Packages</h3>
+                    <div class="pricing-grid">
+                        <div class="price-box"><h3>Basic Package – $50/person</h3><p>Includes a premium selection of proteins such as chicken, shrimp, and vegetables—freshly grilled to perfection.</p></div>
+                        <div class="price-box"><h3>Premium Package – $60/person</h3><p>Includes additional premium proteins such as steak, scallops, and lobster for a truly elevated experience.</p></div>
+                    </div>
+                    <div class="how-it-works" style="margin-top: 4rem;">
+                        <div><h3>What's Included:</h3><ul><li>✔️ All fresh ingredients & cooking equipment</li><li>✔️ Full setup and post-event cleanup</li><li>✔️ An unforgettable interactive grill show</li><li>✔️ Professional service from start to finish</li></ul></div>
+                        <div><h3>Hosts Provide:</h3><ul><li>➡️ Space for setup (patio, lawn, etc.)</li><li>➡️ Tables and chairs for guests</li><li>➡️ Guests ready for an amazing evening</li></ul></div>
+                    </div>
+                    <div class="gallery-grid"><img src="https://i.imgur.com/aBTdHB5.png" alt="Happy guests reacting to a hibachi chef's trick." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/aLxJ2Qi.jpeg" alt="A beautifully plated hibachi meal with steak and shrimp." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/lqEeVIP.png" alt="A classic hibachi onion volcano trick in action." loading="lazy" width="250" height="250"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="taco-bar">
+             <div class="service-banner" style="background-image: url('https://i.imgur.com/vLX70N3.jpeg');" aria-label="Bright, colorful tacos displayed artfully on a platter.">
+                <h2>The Taco Bar Fiesta</h2>
+            </div>
+            <div class="service-content">
+                <div class="container fade-in">
+                     <div class="service-description"><p>Bring the joy of authentic street tacos to your event with a <strong>Mexican-Hibachi twist</strong>. Perfect for casual gatherings, birthdays, and corporate lunches, our taco bar keeps the energy high and the flavors bold.</p><h3 style="color: var(--color-red); margin-top: 1.25rem;">Pricing: $15 per person (3-hour service)</h3></div>
+                    <h3 class="text-center" style="margin-bottom: 2rem;">What's Included</h3>
+                    <div class="taco-menu-grid">
+                        <div><h4>Proteins & More</h4><ul><li>Carne Asada, Pollo Asado, Al Pastor, Shrimp</li><li><strong>Mulitas</strong> (a cheesy, grilled favorite)</li><li>Rice, Beans & Grilled Veggies</li></ul><h4>Toppings & Salsas</h4><ul><li>Fresh tortillas, guacamole, pico de gallo, onions, cilantro, lime, and cheese.</li></ul></div>
+                        <div><h4>Complete Service</h4><ul><li>Full taco station setup and friendly staff</li><li>Fresh, high-quality ingredients</li><li>Disposable plates, napkins, and utensils</li><li>Complete cleanup and breakdown</li></ul></div>
+                    </div>
+                    <div class="gallery-grid"><img src="https://i.imgur.com/d4R8Gx8.jpeg" alt="A traditional al pastor spit with marinated pork." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/myLS4jJ.png" alt="Guests happily building their own tacos at the vibrant bar." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/ugYwblq.png" alt="A colorful spread of fresh salsas and toppings." loading="lazy" width="250" height="250"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="buffet">
+            <div class="service-banner" style="background-image: url('https://i.imgur.com/KD9gYv5.png');" aria-label="Elegant buffet table setup at a large wedding reception.">
+                <h2>Buffet-Style Catering</h2>
+            </div>
+            <div class="service-content">
+                <div class="container fade-in">
+                    <div class="service-description"><p>For gatherings of 50 or more, our buffet-style catering delivers an abundant, flavorful, and effortless experience. We handle every detail so you can focus on your guests.</p></div>
+                    <div class="taco-menu-grid">
+                        <div><h3>Perfect For:</h3><ul><li>Weddings & Anniversaries</li><li>Corporate Events & Conferences</li><li>Large Family & Community Celebrations</li></ul></div>
+                        <div><h3>Key Features:</h3><ul><li>Minimum of 50 guests</li><li>Customizable menus to match your event theme</li><li>Elegant presentation and professional staffing</li><li>Inquiry-based pricing for a tailored quote</li></ul></div>
+                    </div>
+                     <div class="gallery-grid"><img src="https://i.imgur.com/KD9gYv5.png" alt="An elegant wedding buffet line with a variety of dishes." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/XPhM5VN.png" alt="Professionals mingling and enjoying food at a corporate event." loading="lazy" width="250" height="250"><img src="https://i.imgur.com/7O3epqt.png" alt="Smiling guests filling their plates at the buffet." loading="lazy" width="250" height="250"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <div class="container fade-in">
+                <h2 class="text-center" style="margin-bottom: 2.5rem;">What Our Clients Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-slide active"><p>"Joey's Way made my husband's 40th birthday unforgettable. The hibachi show was incredible, and the food was even better. Worth every penny!"</p><div class="stars">★★★★★</div><cite>— Sarah L.</cite></div>
+                    <div class="testimonial-slide"><p>"We hired them for our company picnic and the taco bar was a massive hit. So professional, so delicious. Everyone is still talking about it."</p><div class="stars">★★★★★</div><cite>— Mark D., CEO of TechCorp</cite></div>
+                    <div class="testimonial-slide"><p>"The best hibachi I've ever had, and it was in my own backyard! Chef Joseph is a true artist and entertainer. Highly recommended."</p><div class="stars">★★★★★</div><cite>— Emily R.</cite></div>
+                    <div class="testimonial-slide"><p>"From booking to cleanup, the process was seamless. They handled everything for our large family reunion. The buffet was elegant and tasty."</p><div class="stars">★★★★★</div><cite>— The Johnson Family</cite></div>
+                    <div class="slider-controls"><button class="slider-btn" id="prev-slide" aria-label="Previous testimonial">&lt;</button><button class="slider-btn" id="next-slide" aria-label="Next testimonial">&gt;</button></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="container fade-in">
+                <h2 class="text-center" style="margin-bottom: 2.5rem;">Frequently Asked Questions</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item"><button class="faq-question">What is the minimum number of guests required to book?</button><div class="faq-answer"><p>We require a minimum of 15 guests for our Hibachi and Taco Bar experiences. For buffet catering, the minimum is 50 guests.</p></div></div>
+                    <div class="faq-item"><button class="faq-question">How far do you travel?</button><div class="faq-answer"><p>We primarily serve the greater metropolitan area. A travel fee may apply for locations more than 30 miles from our base of operations. Please include your address in the booking form for an accurate quote.</p></div></div>
+                    <div class="faq-item"><button class="faq-question">What is your cancellation policy?</button><div class="faq-answer"><p>The $100 deposit is non-refundable. Cancellations made within 7 days of the event date are subject to a 50% charge of the total estimated bill. We understand emergencies happen and will work with you to reschedule if possible.</p></div></div>
+                    <div class="faq-item"><button class="faq-question">Do you accommodate dietary restrictions?</button><div class="faq-answer"><p>Absolutely. Please let us know about any allergies or dietary restrictions (vegetarian, gluten-free, etc.) in the message section of the booking form, and we will be happy to accommodate them.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="book-now" class="section">
+            <div class="container">
+                <h2 class="text-center" style="margin-bottom: 2rem;">Book Your Experience</h2>
+                <div class="calendly-inline-widget" data-url="https://calendly.com/thejoeysway/booking?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="#home" class="logo" style="color: var(--color-white);">Joey's Way</a>
+            <ul class="footer-nav">
+                <li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#faq">FAQ</a></li><li><a href="#book-now">Book Now</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/thejoeysway/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            </div>
+            <p>Email: booking@joeysway.com</p><p>Phone: (714) 723-3846</p><p>&copy; <span id="current-year"></span> Joey's Way. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('header');
+            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.getElementById('hamburger');
+
+            window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link, .dropdown-item a, .nav-book-mobile a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            const faders = document.querySelectorAll('.fade-in');
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: "0px 0px -100px 0px" });
+            faders.forEach(fader => appearOnScroll.observe(fader));
+
+            const slides = document.querySelectorAll('.testimonial-slide');
+            if (slides.length > 0) {
+                let currentSlide = 0;
+                const showSlide = n => slides.forEach((slide, i) => slide.classList.toggle('active', i === n));
+                const nextSlide = () => { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); };
+                let slideInterval = setInterval(nextSlide, 5000);
+                const resetInterval = () => { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); };
+                
+                document.getElementById('next-slide')?.addEventListener('click', () => { nextSlide(); resetInterval(); });
+                document.getElementById('prev-slide')?.addEventListener('click', () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); resetInterval(); });
+                showSlide(0);
+            }
+
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const answer = question.nextElementSibling;
+                    const currentlyActive = document.querySelector('.faq-item.active');
+                    if (currentlyActive && currentlyActive !== item) {
+                        currentlyActive.classList.remove('active');
+                        currentlyActive.querySelector('.faq-answer').style.maxHeight = 0;
+                    }
+                    item.classList.toggle('active');
+                    answer.style.maxHeight = item.classList.contains('active') ? answer.scrollHeight + 'px' : 0;
+                });
+            });
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
